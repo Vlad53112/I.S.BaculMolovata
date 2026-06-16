@@ -1,12 +1,15 @@
-/* ============================================================
-   Stilul.css — I.S. Bacul Molovata — Foaie de stil comună
-   ============================================================ */
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I.S.Bacul Molovata</title>
+    <link rel="stylesheet" href="Stilul.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; }
 
-        /* ── HEADER ── */
         header {
             background: linear-gradient(135deg, #011f7a 0%, #0288d1 100%);
             color: white;
@@ -18,7 +21,6 @@
             transition: all 0.3s ease;
         }
 
-        /* STAREA EXTINSA - sus pagina */
         header.expanded .header-top {
             display: flex;
             align-items: center;
@@ -47,7 +49,6 @@
             display: none;
         }
 
-        /* STAREA COMPACTA - dupa scroll */
         header.compact .header-top {
             display: flex;
             align-items: center;
@@ -71,14 +72,12 @@
             padding: 0;
         }
 
-        /* Logo comun */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        /* Nav comun */
         nav ul {
             list-style: none;
             display: flex;
@@ -114,7 +113,6 @@
         }
         .hamburger:hover { background: rgba(255,255,255,0.2); }
 
-        /* Dropdown compact (desktop ingust) */
         .nav-dropdown {
             position: relative;
             display: none;
@@ -175,12 +173,12 @@
             }
             header.expanded .logo-area img { height: 50px; }
             header.expanded .logo-area span { font-size: 14px; }
-            header.expanded .header-nav { padding: 0 16px 12px; display: none !important; }
+            header.expanded .header-nav { padding: 0 16px 12px; }
+            header.expanded .hamburger { display: block !important; }
             header.compact .header-top { padding: 8px 16px; }
             header.compact .logo-area img { height: 34px; }
             header.compact .logo-area span { font-size: 12px; }
-            .nav-dropdown { display: block !important; }
-            .hamburger { display: none !important; }
+            header.compact .hamburger { display: block !important; }
             nav ul {
                 display: none !important;
                 flex-direction: column !important;
@@ -193,7 +191,6 @@
             nav ul li a { padding: 11px 20px; }
         }
 
-        /* ── HERO / CARD PRINCIPAL ── */
         .hero {
             background: #fff;
             max-width: 1200px;
@@ -301,7 +298,6 @@
             .galerie { grid-template-columns: 1fr; }
         }
 
-        /* ── SECTIUNE RECENZII ── */
         .sectiune-recenzii {
             background: linear-gradient(180deg, #f0f4f8 0%, #e8eef5 100%);
             padding: 48px 16px 56px;
@@ -315,7 +311,6 @@
             margin-bottom: 28px;
         }
 
-        /* Slider */
         .slider-wrapper { overflow: hidden; width: 100%; position: relative; }
         .slider-track {
             display: flex;
@@ -342,7 +337,6 @@
         .review-autor { font-weight: 700; color: #011f7a; font-size: 0.88rem; }
         .review-data { font-size: 0.75rem; color: #aaa; margin-top: 4px; }
 
-        /* Formular recenzie */
         .form-recenzie {
             max-width: 560px;
             margin: 40px auto 0;
@@ -418,7 +412,6 @@
         .alert-eroare ul { margin: 0; padding-left: 18px; }
         .alert-eroare li { margin-bottom: 4px; font-size: 0.9rem; }
 
-        /* ── FOOTER ── */
         footer {
             background: linear-gradient(135deg, #011f7a 0%, #0a3880 100%);
             color: rgba(255,255,255,0.9);
@@ -450,3 +443,237 @@
             footer { grid-template-columns: 1fr; gap: 24px; }
             .footer-bottom { grid-column: 1; }
         }
+    </style>
+</head>
+<body>
+
+<?php include 'header.php'; setActiv('Principala'); ?>
+
+<script>
+    const header     = document.getElementById('mainHeader');
+    const hamburger  = document.getElementById('hamburger-btn');
+    const navExpanded  = document.getElementById('navExpanded');
+    const navCompact   = document.getElementById('navCompact');
+    const menuCompact  = document.getElementById('menuCompact');
+
+    function updateHeader() {
+        const isMobile = window.innerWidth <= 900;
+        const scrolled = window.scrollY > 60;
+
+        if (scrolled) {
+            header.classList.remove('expanded');
+            header.classList.add('compact');
+            navExpanded.style.display = 'none';
+            navCompact.style.display  = isMobile ? 'none' : 'flex';
+            hamburger.style.display   = isMobile ? 'block' : 'none';
+        } else {
+            header.classList.remove('compact');
+            header.classList.add('expanded');
+            navExpanded.style.display = isMobile ? 'none' : 'flex';
+            navCompact.style.display  = 'none';
+            hamburger.style.display   = isMobile ? 'block' : 'none';
+        }
+    }
+
+    window.addEventListener('scroll', updateHeader);
+    window.addEventListener('resize', updateHeader);
+    updateHeader();
+
+    hamburger.addEventListener('click', function() {
+        const scrolled = window.scrollY > 60;
+        const isMobile = window.innerWidth <= 900;
+        if (scrolled || isMobile) {
+            if (menuCompact.classList.contains('show')) {
+                menuCompact.classList.remove('show');
+                navCompact.style.display = 'none';
+            } else {
+                navCompact.style.display = 'flex';
+                menuCompact.classList.add('show');
+            }
+        }
+    });
+</script>
+
+<main>
+    <div class="hero" style="margin-left:auto;margin-right:auto;max-width:1200px;margin-top:28px;border-radius:16px;">
+        <img src="logo.jpg" alt="Bacul Molovata">
+        <div class="hero-text">
+            <h2>Bacul Molovata</h2>
+            <p>Fondatorul întreprinderii – AGENŢIA PROPRIETĂŢII PUBLICE al RM. Întreprinderea este predestinată pentru transportarea pasagerilor și mărfurilor din s. Molovata Nouă în s. Molovata, peste râul Nistru, raionul Dubăsari, cu șlepul nepropulsat.</p>
+            <p>De asemenea, populația localităților din această zonă este asigurată cu produse alimentare, în special pe timp de iarnă, tot cu ajutorul podului plutitor.</p>
+            <a href="DespreNoi.php" class="btn-citeste">Citește mai departe →</a>
+        </div>
+    </div>
+
+    <?php
+        $servername = "localhost";
+        $user = "root";
+        $pass = "";
+        $bd_name = "baculmolovata";
+        $con = new mysqli($servername, $user, $pass, $bd_name);
+        if ($con->connect_error) die("Conexiune esuata: " . $con->connect_error);
+
+        $erori  = [];
+        $succes = false;
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['trimite_recenzie'])) {
+            if (!empty($_POST['website'])) {
+                $succes = true;
+            } else {
+                $timp_start = (int)($_POST['timp_start'] ?? 0);
+                if (time() - $timp_start < 3) $erori[] = "Formularul a fost completat prea rapid.";
+
+                $nume = trim($_POST['nume'] ?? '');
+                $nume = strip_tags($nume);
+                $nume = htmlspecialchars($nume, ENT_QUOTES, 'UTF-8');
+                if (empty($nume))            $erori[] = "Numele este obligatoriu.";
+                elseif (strlen($nume) < 3)   $erori[] = "Numele trebuie să aibă cel puțin 3 caractere.";
+                elseif (strlen($nume) > 100) $erori[] = "Numele nu poate depăși 100 de caractere.";
+                elseif (!preg_match('/^[\p{L}\s\-\.]+$/u', $nume)) $erori[] = "Numele poate conține doar litere, spații și cratime.";
+
+                $stele = $_POST['stele'] ?? '';
+                if (!in_array((string)$stele, ['1','2','3','4','5'], true)) $erori[] = "Selectează un calificativ între 1 și 5 stele.";
+                else $stele = (int)$stele;
+
+                $text = trim($_POST['text'] ?? '');
+                if (preg_match('/<script|javascript:|on\w+\s*=/i', $text)) $erori[] = "Textul conține caractere nepermise.";
+                $text = strip_tags($text);
+                $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+                if (empty($text))             $erori[] = "Textul recenziei este obligatoriu.";
+                elseif (strlen($text) < 10)   $erori[] = "Recenzia trebuie să aibă cel puțin 10 caractere.";
+                elseif (strlen($text) > 1000) $erori[] = "Recenzia nu poate depăși 1000 de caractere.";
+
+                if (empty($erori)) {
+                    $stmt = $con->prepare("INSERT INTO recenzii (nume, stele, text, data) VALUES (?, ?, ?, NOW())");
+                    $stmt->bind_param("sis", $nume, $stele, $text);
+                    if ($stmt->execute()) $succes = true;
+                    else $erori[] = "Eroare la salvare. Încearcă din nou.";
+                    $stmt->close();
+                }
+            }
+        }
+
+        $rez_recenzii = $con->query("SELECT nume, stele, text, data FROM recenzii ORDER BY data DESC");
+        $recenzii = [];
+        while ($r = $rez_recenzii->fetch_assoc()) $recenzii[] = $r;
+
+        $result = $con->query("SELECT link FROM poze WHERE link != '' AND link IS NOT NULL LIMIT 12");
+        $poze = [];
+        while ($row = $result->fetch_assoc()) $poze[] = $row['link'];
+        $con->close();
+        $grupuri = array_chunk($poze, 3);
+    ?>
+
+    <div class="sectiune-galerie">
+        <h2>🖼️ Galerie foto</h2>
+        <?php foreach ($grupuri as $grup): ?>
+        <div class="galerie">
+            <?php foreach ($grup as $index => $url): ?>
+            <img src="<?= htmlspecialchars($url) ?>" alt="Poza <?= $index + 1 ?>">
+            <?php endforeach; ?>
+        </div>
+        <?php endforeach; ?>
+        <div class="btn-galerie-wrap">
+            <a href="Galereie.php" class="read-more-button">Vizionează mai departe →</a>
+        </div>
+    </div>
+
+    <section class="sectiune-recenzii">
+        <h2 class="titlu-recenzii">⭐ Ce spun utilizatorii</h2>
+
+        <?php if (!empty($recenzii)): ?>
+        <div class="slider-wrapper">
+            <div class="slider-track">
+                <?php foreach ($recenzii as $rec): ?>
+                <div class="review-card">
+                    <div class="review-stars"><?= str_repeat('★', (int)$rec['stele']) . str_repeat('☆', 5 - (int)$rec['stele']) ?></div>
+                    <p class="review-text">"<?= htmlspecialchars($rec['text']) ?>"</p>
+                    <p class="review-autor">— <?= htmlspecialchars($rec['nume']) ?></p>
+                    <p class="review-data"><?= date('d.m.Y', strtotime($rec['data'])) ?></p>
+                </div>
+                <?php endforeach; ?>
+                <?php foreach ($recenzii as $rec): ?>
+                <div class="review-card">
+                    <div class="review-stars"><?= str_repeat('★', (int)$rec['stele']) . str_repeat('☆', 5 - (int)$rec['stele']) ?></div>
+                    <p class="review-text">"<?= htmlspecialchars($rec['text']) ?>"</p>
+                    <p class="review-autor">— <?= htmlspecialchars($rec['nume']) ?></p>
+                    <p class="review-data"><?= date('d.m.Y', strtotime($rec['data'])) ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <div class="form-recenzie">
+            <h3>✍️ Lasă o recenzie</h3>
+
+            <?php if ($succes): ?>
+                <div class="alert-succes">✅ Recenzia ta a fost trimisă cu succes! Mulțumim!</div>
+            <?php endif; ?>
+            <?php if (!empty($erori)): ?>
+                <div class="alert-eroare">
+                    <ul><?php foreach ($erori as $e): ?><li><?= $e ?></li><?php endforeach; ?></ul>
+                </div>
+            <?php endif; ?>
+
+            <?php if (!$succes): ?>
+            <form method="POST" action="" id="formRecenzie" novalidate>
+                <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="timp_start" value="<?= time() ?>">
+
+                <div class="fg">
+                    <label for="nume">Numele tău *</label>
+                    <input type="text" id="nume" name="nume" maxlength="100"
+                           placeholder="Ex: Ion Popescu"
+                           value="<?= htmlspecialchars($_POST['nume'] ?? '') ?>" required>
+                    <span class="hint">Doar litere și cratime, 3–100 caractere</span>
+                </div>
+
+                <div class="fg">
+                    <label>Calificativ *</label>
+                    <div class="star-rating">
+                        <?php for ($i = 5; $i >= 1; $i--): ?>
+                        <input type="radio" id="s<?= $i ?>" name="stele" value="<?= $i ?>"
+                               <?= (($_POST['stele'] ?? '5') == $i) ? 'checked' : '' ?>>
+                        <label for="s<?= $i ?>">★</label>
+                        <?php endfor; ?>
+                    </div>
+                </div>
+
+                <div class="fg">
+                    <label for="text">Recenzia ta *</label>
+                    <textarea id="text" name="text" rows="4" maxlength="1000"
+                              placeholder="Scrie experiența ta... (10–1000 caractere)"
+                              required><?= htmlspecialchars($_POST['text'] ?? '') ?></textarea>
+                    <span class="hint" id="contor">0 / 1000 caractere</span>
+                </div>
+
+                <button type="submit" name="trimite_recenzie" class="btn-trimite">Trimite recenzia</button>
+            </form>
+            <?php endif; ?>
+        </div>
+    </section>
+</main>
+
+<script>
+const textarea = document.getElementById('text');
+const contor   = document.getElementById('contor');
+if (textarea && contor) {
+    textarea.addEventListener('input', function() {
+        const lung = this.value.length;
+        contor.textContent = lung + ' / 1000 caractere';
+        contor.style.color = lung > 900 ? '#c0392b' : '#aaa';
+    });
+}
+document.getElementById('formRecenzie')?.addEventListener('submit', function(e) {
+    const nume  = document.getElementById('nume').value.trim();
+    const text  = document.getElementById('text').value.trim();
+    const stele = document.querySelector('input[name="stele"]:checked');
+    if (nume.length < 3)  { alert('Numele trebuie să aibă cel puțin 3 caractere.'); e.preventDefault(); return; }
+    if (!stele)            { alert('Te rugăm să selectezi un calificativ.'); e.preventDefault(); return; }
+    if (text.length < 10) { alert('Recenzia trebuie să aibă cel puțin 10 caractere.'); e.preventDefault(); return; }
+});
+</script>
+<?php include 'footer.php'; ?>
+</body>
+</html>

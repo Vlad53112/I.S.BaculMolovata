@@ -1,12 +1,15 @@
-/* ============================================================
-   Stilul.css — I.S. Bacul Molovata — Foaie de stil comună
-   ============================================================ */
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie — I.S. Bacul Molovata</title>
+    <link rel="stylesheet" href="Stilul.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #222; }
 
-        /* ── HEADER ── */
         header {
             background: linear-gradient(135deg, #011f7a 0%, #0288d1 100%);
             color: white;
@@ -18,7 +21,6 @@
             transition: all 0.3s ease;
         }
 
-        /* STAREA EXTINSA - sus pagina */
         header.expanded .header-top {
             display: flex;
             align-items: center;
@@ -47,7 +49,6 @@
             display: none;
         }
 
-        /* STAREA COMPACTA - dupa scroll */
         header.compact .header-top {
             display: flex;
             align-items: center;
@@ -71,14 +72,12 @@
             padding: 0;
         }
 
-        /* Logo comun */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        /* Nav comun */
         nav ul {
             list-style: none;
             display: flex;
@@ -114,7 +113,6 @@
         }
         .hamburger:hover { background: rgba(255,255,255,0.2); }
 
-        /* Dropdown compact (desktop ingust) */
         .nav-dropdown {
             position: relative;
             display: none;
@@ -167,7 +165,6 @@
             color: #fff;
         }
 
-        /* RESPONSIVE - mobil */
         @media (max-width: 900px) {
             header.expanded .header-top {
                 justify-content: space-between;
@@ -193,7 +190,6 @@
             nav ul li a { padding: 11px 20px; }
         }
 
-        /* ── HERO / CARD PRINCIPAL ── */
         .hero {
             background: #fff;
             max-width: 1200px;
@@ -252,7 +248,6 @@
             .hero-text { padding: 24px 20px; }
         }
 
-        /* ── GALERIE ── */
         .sectiune-galerie {
             max-width: 1200px;
             margin: 32px auto 0;
@@ -301,124 +296,6 @@
             .galerie { grid-template-columns: 1fr; }
         }
 
-        /* ── SECTIUNE RECENZII ── */
-        .sectiune-recenzii {
-            background: linear-gradient(180deg, #f0f4f8 0%, #e8eef5 100%);
-            padding: 48px 16px 56px;
-            margin-top: 40px;
-        }
-        .titlu-recenzii {
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #011f7a;
-            margin-bottom: 28px;
-        }
-
-        /* Slider */
-        .slider-wrapper { overflow: hidden; width: 100%; position: relative; }
-        .slider-track {
-            display: flex;
-            gap: 20px;
-            width: max-content;
-            animation: derulare 30s linear infinite;
-        }
-        .slider-track:hover { animation-play-state: paused; }
-        @keyframes derulare {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .review-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 24px;
-            width: 280px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            flex-shrink: 0;
-            border-top: 3px solid #0288d1;
-        }
-        .review-stars { font-size: 1.3rem; color: #f4a000; margin-bottom: 10px; }
-        .review-text { font-size: 0.9rem; color: #555; font-style: italic; margin-bottom: 12px; line-height: 1.6; }
-        .review-autor { font-weight: 700; color: #011f7a; font-size: 0.88rem; }
-        .review-data { font-size: 0.75rem; color: #aaa; margin-top: 4px; }
-
-        /* Formular recenzie */
-        .form-recenzie {
-            max-width: 560px;
-            margin: 40px auto 0;
-            background: #fff;
-            border-radius: 16px;
-            padding: 36px 32px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.09);
-        }
-        .form-recenzie h3 {
-            text-align: center;
-            color: #011f7a;
-            margin-bottom: 28px;
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
-        #formRecenzie {
-            display: block !important;
-            flex-direction: unset !important;
-            align-items: unset !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        .fg { margin-bottom: 20px; display: flex; flex-direction: column; gap: 7px; }
-        .fg label { font-weight: 600; font-size: 0.88rem; color: #444; letter-spacing: 0.2px; }
-        .fg input[type="text"], .fg textarea {
-            width: 100% !important;
-            box-sizing: border-box !important;
-            padding: 11px 14px !important;
-            margin: 0 !important;
-            border: 1.5px solid #e0e0e0 !important;
-            border-radius: 9px !important;
-            font-size: 0.95rem !important;
-            font-family: inherit !important;
-            background: #f8fafc !important;
-            box-shadow: none !important;
-            transition: border-color 0.2s, background 0.2s !important;
-            color: #222 !important;
-        }
-        .fg input[type="text"]:focus, .fg textarea:focus {
-            outline: none !important;
-            border-color: #0288d1 !important;
-            background: #fff !important;
-            box-shadow: 0 0 0 3px rgba(2,136,209,0.12) !important;
-        }
-        .fg textarea { resize: vertical !important; min-height: 110px !important; }
-        .fg .hint { font-size: 0.76rem; color: #aaa; }
-
-        .star-rating { display: flex; flex-direction: row-reverse; justify-content: flex-end; gap: 6px; }
-        .star-rating input[type="radio"] { display: none !important; width: auto !important; margin: 0 !important; padding: 0 !important; }
-        .star-rating label { font-size: 2.2rem; color: #ddd; cursor: pointer; transition: color 0.15s; line-height: 1; }
-        .star-rating input:checked ~ label,
-        .star-rating label:hover,
-        .star-rating label:hover ~ label { color: #f4a000; }
-
-        #formRecenzie .btn-trimite {
-            width: 100% !important;
-            padding: 13px !important;
-            background: linear-gradient(135deg, #011f7a, #0288d1) !important;
-            color: #fff !important;
-            border: none !important;
-            border-radius: 9px !important;
-            font-size: 1rem !important;
-            font-weight: 700 !important;
-            cursor: pointer !important;
-            margin-top: 8px !important;
-            transition: opacity 0.2s !important;
-            letter-spacing: 0.3px !important;
-        }
-        #formRecenzie .btn-trimite:hover { opacity: 0.88 !important; }
-
-        .alert-succes { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; border-radius: 9px; padding: 14px 18px; margin-bottom: 20px; font-weight: 600; }
-        .alert-eroare { background: #fce4ec; color: #880e4f; border: 1px solid #f48fb1; border-radius: 9px; padding: 14px 18px; margin-bottom: 20px; }
-        .alert-eroare ul { margin: 0; padding-left: 18px; }
-        .alert-eroare li { margin-bottom: 4px; font-size: 0.9rem; }
-
-        /* ── FOOTER ── */
         footer {
             background: linear-gradient(135deg, #011f7a 0%, #0a3880 100%);
             color: rgba(255,255,255,0.9);
@@ -450,3 +327,37 @@
             footer { grid-template-columns: 1fr; gap: 24px; }
             .footer-bottom { grid-column: 1; }
         }
+    </style>
+</head>
+<body>
+
+<?php include 'header.php'; setActiv(''); ?>
+
+<?php
+    $servername = "localhost";
+    $user = "root";
+    $pass = "";
+    $bd_name = "baculmolovata";
+    $con = new mysqli($servername, $user, $pass, $bd_name);
+    if ($con->connect_error) die("Conexiune esuata: " . $con->connect_error);
+
+    $result = $con->query("SELECT Link FROM poze WHERE link != '' AND link IS NOT NULL");
+    $poze = [];
+    while ($row = $result->fetch_assoc()) $poze[] = $row['Link'];
+    $con->close();
+    $grupuri = array_chunk($poze, 3);
+?>
+
+<section class="continut">
+    <?php foreach ($grupuri as $grup): ?>
+    <div class="galerie">
+        <?php foreach ($grup as $index => $url): ?>
+        <img src="<?= htmlspecialchars($url) ?>" alt="Poza <?= $index + 1 ?>">
+        <?php endforeach; ?>
+    </div>
+    <?php endforeach; ?>
+</section>
+
+<?php include 'footer.php'; ?>
+</body>
+</html>
